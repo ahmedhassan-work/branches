@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>فروع الأكاديمية الأمريكية المصرية</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F7F4EE;
+    --surface: #FFFFFF;
+    --surface-alt: #EFEAE0;
+    --text: #1C2130;
+    --text-muted: #5B6172;
+    --border: #E2DCCC;
+    --navy: #17233F;
+    --navy-ink: #0E1626;
+    --gold: #B4872C;
+    --gold-soft: #F1E2BE;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #10141F;
+      --surface: #191F2E;
+      --surface-alt: #1F26374d;
+      --text: #EDEFF4;
+      --text-muted: #A2A8BA;
+      --border: #2B3247;
+      --navy: #1E2C4E;
+      --navy-ink: #0B1120;
+      --gold: #D4A94A;
+      --gold-soft: #3A3120;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #10141F;
+    --surface: #191F2E;
+    --surface-alt: #1F26374d;
+    --text: #EDEFF4;
+    --text-muted: #A2A8BA;
+    --border: #2B3247;
+    --navy: #1E2C4E;
+    --navy-ink: #0B1120;
+    --gold: #D4A94A;
+    --gold-soft: #3A3120;
+  }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Cairo", "Segoe UI", Tahoma, sans-serif;
+  }
+  body { min-height: 100%; }
+
+  header.hero {
+    background: linear-gradient(155deg, var(--navy-ink), var(--navy));
+    color: #F4F1E6;
+    padding: 2.4rem 1.25rem 2rem;
+    padding-top: calc(2.4rem + env(safe-area-inset-top, 0px));
+  }
+  .hero-inner { max-width: 760px; margin: 0 auto; }
+  .hero-inner h1 {
+    font-size: clamp(1.6rem, 5vw, 2.2rem);
+    font-weight: 800;
+    margin: 0 0 .5rem;
+    line-height: 1.3;
+  }
+  .hero-inner p {
+    margin: 0;
+    color: #CBD1E0;
+    font-size: 1rem;
+    line-height: 1.7;
+    max-width: 46ch;
+  }
+  .hero-count {
+    display: inline-flex;
+    align-items: baseline;
+    gap: .4rem;
+    margin-top: 1.1rem;
+    background: rgba(244,241,230,.08);
+    border: 1px solid rgba(244,241,230,.18);
+    border-radius: 999px;
+    padding: .5rem 1rem;
+  }
+  .hero-count b { font-size: 1.2rem; color: var(--gold); }
+  .hero-count span { font-size: .92rem; color: #DDE1EC; }
+
+  .controls {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    padding: .9rem 1.25rem;
+  }
+  .controls-inner { max-width: 760px; margin: 0 auto; }
+  .search-box {
+    position: relative;
+  }
+  .search-box input {
+    width: 100%;
+    font-family: inherit;
+    font-size: 1rem;
+    padding: .75rem 1rem .75rem 1rem;
+    padding-right: 2.6rem;
+    border-radius: .7rem;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+  }
+  .search-box input:focus {
+    outline: 2px solid var(--gold);
+    outline-offset: 1px;
+  }
+  .search-box svg {
+    position: absolute;
+    right: .85rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+  }
+  .chips {
+    display: flex;
+    gap: .5rem;
+    margin-top: .7rem;
+    overflow-x: auto;
+    padding-bottom: .2rem;
+  }
+  .chips::-webkit-scrollbar { display: none; }
+  .chip {
+    flex: 0 0 auto;
+    font-family: inherit;
+    font-size: .87rem;
+    padding: .4rem .9rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text-muted);
+    cursor: pointer;
+  }
+  .chip[aria-pressed="true"] {
+    background: var(--navy);
+    border-color: var(--navy);
+    color: #F4F1E6;
+  }
+
+  main { max-width: 760px; margin: 0 auto; padding: 1.5rem 1.25rem 3rem; }
+
+  .region-block { margin-bottom: 2rem; }
+  .region-block h2 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin: 0 0 .9rem;
+    color: var(--text);
+    padding-inline-start: .6rem;
+    border-inline-start: 3px solid var(--gold);
+  }
+
+  .branch-list { display: grid; gap: .75rem; }
+
+  .branch-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: .6rem;
+    padding: 1rem 1.1rem;
+  }
+  .branch-card h3 {
+    margin: 0 0 .35rem;
+    font-size: 1.05rem;
+    font-weight: 700;
+  }
+  .branch-card .addr {
+    margin: 0 0 .75rem;
+    color: var(--text-muted);
+    font-size: .92rem;
+    line-height: 1.65;
+  }
+  .branch-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+  }
+  .branch-actions a {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    font-size: .87rem;
+    text-decoration: none;
+    color: var(--navy);
+    background: var(--gold-soft);
+    border-radius: .5rem;
+    padding: .45rem .75rem;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .branch-actions a { color: #F4E8C8; }
+  }
+  :root[data-theme="dark"] .branch-actions a { color: #F4E8C8; }
+  .branch-actions a svg { flex: 0 0 auto; }
+  .branch-actions a.map { background: var(--surface-alt); color: var(--text); }
+
+  .empty-state {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: var(--text-muted);
+  }
+  .empty-state p { margin: .5rem 0 0; }
+
+  .online-band {
+    max-width: 760px;
+    margin: 0 auto 2.5rem;
+    padding: 0 1.25rem;
+  }
+  .online-band .inner {
+    background: var(--navy);
+    color: #F4F1E6;
+    border-radius: .75rem;
+    padding: 1.25rem 1.4rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .online-band h3 { margin: 0 0 .25rem; font-size: 1.02rem; }
+  .online-band p { margin: 0; color: #C7CCDC; font-size: .88rem; }
+  .online-band .numbers { display: flex; gap: .5rem; flex-wrap: wrap; }
+  .online-band .numbers a {
+    text-decoration: none;
+    color: var(--navy);
+    background: var(--gold);
+    border-radius: .5rem;
+    padding: .5rem .85rem;
+    font-size: .9rem;
+    font-weight: 700;
+  }
+
+  footer {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: .82rem;
+    padding: 0 1.25rem 2.5rem;
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <h1>فروع الأكاديمية الأمريكية المصرية</h1>
+    <p>دوّر على أقرب فرع ليك في محافظتك، بالعنوان بالتفصيل، رقم الموبايل، ولوكيشن جاهز على الخريطة.</p>
+    <div class="hero-count"><b id="branchCount">31</b><span>فرع على مستوى الجمهورية</span></div>
+  </div>
+</header>
+
+<div class="controls">
+  <div class="controls-inner">
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="دوّر باسم الفرع أو المحافظة أو الشارع…" autocomplete="off">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </div>
+    <div class="chips" id="chips"></div>
+  </div>
+</div>
+
+<main id="main">
+  <div id="results"></div>
+  <div class="empty-state" id="emptyState" hidden>
+    <p>😔 مفيش فرع مطابق للبحث ده، جرب اسم تاني</p>
+  </div>
+</main>
+
+<div class="online-band">
+  <div class="inner">
+    <div>
+      <h3>متاح كمان كورس أونلاين</h3>
+      <p>لو مفيش فرع قريب منك، اتعلم أونلاين مع نفس مستوى المدرسين</p>
+    </div>
+    <div class="numbers">
+      <a href="tel:+201061512225">01061512225</a>
+      <a href="tel:+201116121720">01116121720</a>
+    </div>
+  </div>
+</div>
+
+<footer>© <span id="year"></span> American Egyptian Academy — جميع الحقوق محفوظة</footer>
+
+<script>
+const branches = [
+  { name: "مدينة نصر", region: "القاهرة الكبرى والجيزة",
+    addr: "٦ شارع عباس العقاد، عمارة البنك الأهلي، أمام كشري التحرير مباشرة – الدور التاسع",
+    phones: ["01009450445"], map: "https://maps.app.goo.gl/ThLzu54unXHsSLG67?g_st=iw" },
+  { name: "الدقي", region: "القاهرة الكبرى والجيزة",
+    addr: "59 شارع إيران، متفرع من شارع محيي الدين أبو العز – الدقي، بجوار محطة مترو البحوث (٣ دقائق من المحطة)",
+    phones: ["01118245809", "01015709036"], map: "https://maps.app.goo.gl/y1qfEg3ESJEcnwFw9" },
+  { name: "المعادي", region: "القاهرة الكبرى والجيزة",
+    addr: "شارع ١٠، عمارة زهران، فوق فودافون وبجوار بنك CIB – الدور الخامس",
+    phones: ["01153335392"], map: "https://maps.google.com/?q=29.959723,31.259783" },
+  { name: "شبرا مصر", region: "القاهرة الكبرى والجيزة",
+    addr: "١٨٠ شارع الجسر، ميدان الخلفاوي، برج الشيماء – أمام مترو الخلفاوي (فوق كافيه رصيف نمرة ٥)",
+    phones: ["01158874523"], map: "https://maps.google.com/?q=30.097742,31.244955" },
+  { name: "٦ أكتوبر", region: "القاهرة الكبرى والجيزة",
+    addr: "برج رقم ٢، مول زمزم، الدور الرابع، شقة ٢٠٤ – ميدان الحصري، أمام مطعم كرم الشام",
+    phones: ["01112343573"], map: "https://maps.app.goo.gl/eVxAopojFW1JeZr8A?g_st=iw" },
+
+  { name: "الإسكندرية", region: "الإسكندرية",
+    addr: "١٠٨ شارع بورسعيد، كامب شيزار، بجوار بن باريستا – الدور الأول",
+    phones: ["01024535475"], map: "https://maps.apple.com/?ll=31.214425,29.922878&q=My%20Location" },
+  { name: "العجمي", region: "الإسكندرية",
+    addr: "ميدان الهانوفيل، أعلى خواطر الدمشقية وهريسة أحمد حسنين، برج نسمة السعيد – الدور الثاني",
+    phones: ["01112343653"], map: "https://maps.google.com/?q=31.098881,29.771738" },
+
+  { name: "الزقازيق", region: "الدلتا",
+    addr: "فلل الجامعة، آخر شارع الاستاد، برج رويال بلازا – أعلى Billissimo Coffee",
+    phones: ["01027221605"], map: "https://goo.gl/maps/excRCr8g5jRbBjsi8" },
+  { name: "بنها", region: "الدلتا",
+    addr: "٢٢/أ شارع كلية التجارة، بجوار كلية تجارة جامعة بنها مباشرة – بجوار بيم وأرابيسك",
+    phones: ["01000976012"], map: "https://maps.app.goo.gl/z6YwCdfu5TbRrrfs6" },
+  { name: "شبين الكوم – المنوفية", region: "الدلتا",
+    addr: "٩ برج التعمير، شارع جمال عبد الناصر، بجوار بنك CIB، أمام كنتاكي وسيتي كلوب",
+    phones: ["01061223759"], map: "https://maps.google.com/?q=30.564739,31.012203" },
+  { name: "طنطا", region: "الدلتا",
+    addr: "59 شارع المعتصم، تقاطع شارع سعيد، بجانب توكيل ريفين، بجوار كلية التجارة، أمام كنافة وبسبوسة مباشرة",
+    phones: ["01099138124"], map: "https://maps.app.goo.gl/mp2kqJ6Hqy85bJtQ9" },
+  { name: "المنصورة", region: "الدلتا",
+    addr: "المشاية، مقابل مستشفى الجزيرة الدولي (السلاب)، أعلى توكيل زانوسي",
+    phones: ["01027572768"], map: "https://maps.google.com/?q=31.045475,31.365343" },
+  { name: "كفر الشيخ", region: "الدلتا",
+    addr: "برج سرايا الباشا، شارع اللواء جمال حماد، أمام حديقة صنعاء – الدور الأول",
+    phones: ["01021957655"], map: "https://maps.google.com/?q=31.103731,30.946077" },
+  { name: "كفر الشيخ ٢", region: "الدلتا",
+    addr: "شارع الخليفة المأمون، أعلى الخولي وأمام الصعيدي العالمي للعصائر",
+    phones: ["01033846287"], map: "https://maps.google.com/?q=31.112354,30.943233" },
+  { name: "دمنهور", region: "الدلتا",
+    addr: "شارع عبد السلام الشاذلي، أمام ماكدونالدز، أعلى كافيه باتاجونيا – الدور الثالث",
+    phones: ["01094934374"], map: "https://rb.gy/jbwu1" },
+  { name: "دمياط القديمة", region: "الدلتا",
+    addr: "ميدان سرور، برج سوا، أمام المعاصر",
+    phones: ["01015482840"], map: "https://maps.google.com/?q=31.411709,31.811878" },
+  { name: "دمياط الجديدة", region: "الدلتا",
+    addr: "المنطقة المركزية، عمارة بنك الإسكندرية – الدور الرابع، بجوار سيتي جراند مول ومول الحمد",
+    phones: ["01020405791"], map: "https://maps.google.com/?q=31.436487,31.678417" },
+
+  { name: "أسيوط", region: "الصعيد",
+    addr: "الأزهر، أبراج النصر، برج أ٣، بجوار قصر نابولي الجديد – الدور الخامس (واتساب)",
+    phones: ["01096877294"], map: "https://maps.app.goo.gl/TPQv37GSE5vyBTZF9" },
+  { name: "أسيوط ٢", region: "الصعيد",
+    addr: "يسري راغب، برج سيدي جلال، أمام صيدلية وجدي – الدور الرابع",
+    phones: ["01141792083"], map: "https://maps.google.com/?q=27.182058,31.183817" },
+  { name: "المنيا", region: "الصعيد",
+    addr: "شارع عمر سلطان، أمام مسجد صلاح الدين (الأخصاص) – الدور الثالث",
+    phones: ["01090958879"], map: "https://maps.google.com/?q=28.114656,30.747187" },
+  { name: "بني سويف", region: "الصعيد",
+    addr: "برج رويال بالس، شارع بورسعيد، بجوار مبنى الجوازات وبنك قناة السويس – الدور الأول (بجوار جامعة بني سويف)",
+    phones: ["01124884720"], map: "https://maps.app.goo.gl/nBxy7tPQfvvxT6bM6?g_st=iw" },
+  { name: "سوهاج", region: "الصعيد",
+    addr: "برج ضيف الله، أمام نادي التجديف، شارع الجمهورية، بعد ماكدونالدز بـ100 متر – الدور الثالث",
+    phones: ["01095492186"], map: "https://maps.google.com/?q=26.559076,31.698975" },
+  { name: "الفيوم", region: "الصعيد",
+    addr: "دلة، أمام دنيا الأقطان، شارع جمال عبد الناصر، برج القمر – الدور الرابع",
+    phones: ["01025088720"], map: "https://maps.google.com/?q=29.317587,30.854105" },
+  { name: "الأقصر", region: "الصعيد",
+    addr: "٩١ شارع التليفزيون، أمام المستشفى الدولي – الدور الثالث، بجوار بي تك",
+    phones: ["01141791529"], map: "https://maps.app.goo.gl/3nJY7ZcTDWKpqPyc7" },
+  { name: "قنا", region: "الصعيد",
+    addr: "شارع 23 يوليو، برج زمزم، أعلى توكيل قطونيل وسموذي بارادايس",
+    phones: ["01141791860"], map: "https://www.google.com/maps?q=26.158538818359375,32.7158088684082&z=17&hl=en" },
+  { name: "أسوان", region: "الصعيد",
+    addr: "شارع أبطال التحرير، مول فيرست، المدخل السكني – الدور الثالث العلوي",
+    phones: ["01013360394"], map: "https://maps.google.com/?q=24.096693,32.899609" },
+
+  { name: "الإسماعيلية", region: "القناة والبحر الأحمر ومطروح",
+    addr: "شارع شبين، أمام شركة الكهرباء، برج ٥ – الدور الأول، بالقرب من فودافون وبافلو برجر",
+    phones: ["01064938864"], map: "https://maps.app.goo.gl/c96ubmb2KoN6YbRx9" },
+  { name: "السويس", region: "القناة والبحر الأحمر ومطروح",
+    addr: "شارع بارادايس، برج مصر بلاس، مكتب ١٠ – الدور الثاني",
+    phones: ["01068567679"], map: "https://maps.google.com/?q=29.966938,32.553818" },
+  { name: "بورسعيد", region: "القناة والبحر الأحمر ومطروح",
+    addr: "شارع الجمهورية، عمارة ١١، أمام بنك مصر، فوق المخزنجي وعلى بابا – الدور الثاني، شقة ٦",
+    phones: ["01128217960"], map: "https://maps.google.com/?q=31.261448,32.309334" },
+  { name: "الغردقة", region: "القناة والبحر الأحمر ومطروح",
+    addr: "شارع النصر، سبينس مول، الدور الثالث، شقة ١١٥",
+    phones: ["01033310514"], map: "https://maps.google.com/?q=27.245337,33.824970" },
+  { name: "مرسى مطروح", region: "القناة والبحر الأحمر ومطروح",
+    addr: "٤ شارع إسكندرية، برج زهرة المدينة، فوق معمل البرج – الدور الثاني",
+    phones: ["01033310514"], map: "https://maps.google.com/?q=31.354282,27.240309" },
+];
+
+const regionOrder = [
+  "القاهرة الكبرى والجيزة",
+  "الإسكندرية",
+  "الدلتا",
+  "الصعيد",
+  "القناة والبحر الأحمر ومطروح"
+];
+
+document.getElementById("branchCount").textContent = branches.length;
+document.getElementById("year").textContent = new Date().getFullYear();
+
+const pinSvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>';
+const phoneSvg = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>';
+
+function telHref(num) { return "tel:+20" + num.replace(/^0/, ""); }
+
+function renderChips() {
+  const chipsEl = document.getElementById("chips");
+  const all = document.createElement("button");
+  all.className = "chip";
+  all.textContent = "كل المحافظات";
+  all.dataset.region = "";
+  all.setAttribute("aria-pressed", "true");
+  chipsEl.appendChild(all);
+  regionOrder.forEach(r => {
+    const b = document.createElement("button");
+    b.className = "chip";
+    b.textContent = r;
+    b.dataset.region = r;
+    b.setAttribute("aria-pressed", "false");
+    chipsEl.appendChild(b);
+  });
+  chipsEl.addEventListener("click", (e) => {
+    const btn = e.target.closest(".chip");
+    if (!btn) return;
+    [...chipsEl.children].forEach(c => c.setAttribute("aria-pressed", c === btn ? "true" : "false"));
+    activeRegion = btn.dataset.region;
+    render();
+  });
+}
+
+let activeRegion = "";
+
+function render() {
+  const q = document.getElementById("searchInput").value.trim().toLowerCase();
+  const resultsEl = document.getElementById("results");
+  resultsEl.innerHTML = "";
+  let totalShown = 0;
+
+  regionOrder.forEach(region => {
+    if (activeRegion && activeRegion !== region) return;
+    const items = branches.filter(b => {
+      if (b.region !== region) return false;
+      if (!q) return true;
+      const hay = (b.name + " " + b.region + " " + b.addr).toLowerCase();
+      return hay.includes(q);
+    });
+    if (items.length === 0) return;
+    totalShown += items.length;
+
+    const block = document.createElement("section");
+    block.className = "region-block";
+    const h2 = document.createElement("h2");
+    h2.textContent = region;
+    block.appendChild(h2);
+
+    const list = document.createElement("div");
+    list.className = "branch-list";
+    items.forEach(b => {
+      const card = document.createElement("article");
+      card.className = "branch-card";
+      const phoneLinks = b.phones.map(p =>
+        `<a href="${telHref(p)}">${phoneSvg} ${p}</a>`
+      ).join("");
+      card.innerHTML = `
+        <h3>${b.name}</h3>
+        <p class="addr">${b.addr}</p>
+        <div class="branch-actions">
+          ${phoneLinks}
+          <a class="map" href="${b.map}" target="_blank" rel="noopener">${pinSvg} افتحي اللوكيشن</a>
+        </div>`;
+      list.appendChild(card);
+    });
+    block.appendChild(list);
+    resultsEl.appendChild(block);
+  });
+
+  document.getElementById("emptyState").hidden = totalShown !== 0;
+}
+
+renderChips();
+render();
+document.getElementById("searchInput").addEventListener("input", render);
+</script>
+</body>
+</html>
